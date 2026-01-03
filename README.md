@@ -1,64 +1,81 @@
-# Tuberculosis (TB) Detection from Chest X-Rays 🩻
+# 🫁 Tuberculosis Detection in Chest X-Rays using Deep Learning
+![TB Detection Banner](https://cdn.who.int/media/images/default-source/products/global-reports/tb-report/2024/gtb_report-web-banner-2024.tmb-1920v.png?sfvrsn=d47b797e_1)
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c)
-![Model](https://img.shields.io/badge/Model-EfficientNet--B3-green)
-![Accuracy](https://img.shields.io/badge/Accuracy-90.0%25-brightgreen)
+> 💡 **Did you know?** In 2023, tuberculosis caused approximately **1.25 million deaths** worldwide, making it one of the deadliest infectious diseases globally. Early detection through chest X-rays can significantly improve treatment outcomes. [Source: WHO Global Tuberculosis Report 2024](https://www.who.int/teams/global-programme-on-tuberculosis-and-lung-health/tb-reports/global-tuberculosis-report-2024/tb-disease-burden/1-2-tb-mortality)
 
-## 📋 Project Overview
+[![Python](https://img.shields.io/badge/Python-3.8%2B-green)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-1.12%2B-orange)](https://pytorch.org)
 
-This project implements an advanced deep learning pipeline to detect Tuberculosis (TB) from chest X-ray images. Utilizing **EfficientNet-B3** as the backbone, the model employs state-of-the-art techniques such as **Mixup Augmentation**, **Two-Phase Training**, and **Test-Time Augmentation (TTA)** to achieve high diagnostic accuracy.
+## 📌 Project Overview
 
-The system is designed to distinguish between **Healthy** and **TB-positive** scans with a focus on minimizing false negatives (high sensitivity).
+This project implements a deep learning pipeline for tuberculosis detection in chest X-ray images using a **limited dataset of only 300 images**. Despite the small dataset size, our model achieves **90% accuracy** through innovative training techniques that prevent overfitting and maximize performance.
 
----
+## 🧪 The Challenge
 
-## 🚀 Key Features
+The primary challenge is developing a robust TB detection model with **only 300 training images** (150 healthy + 150 TB) while avoiding overfitting:
 
-* **Architecture:** EfficientNet-B3 (Transfer Learning from ImageNet).
-* **Data Augmentation:** "Mixup" strategy to improve generalization and robustness.
-* **Training Strategy:**
-    1.  **Phase 1:** Frozen backbone training to adapt the classifier head.
-    2.  **Phase 2:** Fine-tuning the entire network with a lower learning rate.
-* **Inference:** Test-Time Augmentation (TTA) to boost prediction reliability.
-* **Visualization:** Comprehensive plotting of loss/accuracy curves and confusion matrices.
+- 📉 **Extremely limited data** - standard deep learning models typically require thousands of examples
+- ⚖️ **Balanced classes** but insufficient for conventional deep learning approaches
+- 🎯 **Goal**: Achieve high accuracy without overfitting
+- 📏 **Constraint**: Model must generalize well to unseen data
 
----
+This mirrors real-world medical AI challenges where labeled data is scarce, expensive to acquire, and requires expert annotation. The project demonstrates how to effectively train a model with minimal data while maintaining high performance.
 
-## 📊 Performance Results
+## 📊 Dataset Information
 
-The model was evaluated on a validation set of 100 samples. The use of Test-Time Augmentation (TTA) significantly improved performance by **+7.00%** over standard inference.
+The project uses a subset from the Sakha-TB dataset:
 
-| Metric | Standard Evaluation | **TTA Evaluation** |
-| :--- | :--- | :--- |
-| **Accuracy** | 83.00% | **90.00%** |
-| **Sensitivity (TB)** | 84.00% | **90.00%** |
-| **Specificity (Healthy)** | 82.00% | **90.00%** |
-| **ROC AUC** | 0.9172 | **0.9564** |
+| Category | Healthy | TB | Total |
+|----------|---------|------|-------|
+| **Training** | 150 | 150 | 300 |
+| **Testing** | 50 | 50 | 100 |
+| **Total** | 200 | 200 | 400 |
 
-### Training Dynamics
-The training process involved a learning rate schedule that decayed over time, preventing overfitting while ensuring convergence.
+## 🧠 Model Architecture
 
-![Training and Validation Curves](output.png)
-*Figure 1: Training metrics showing Loss, Accuracy, Learning Rate Schedule, and the Overfitting Gap.*
+### Core Architecture
+- **Base Model**: EfficientNet-B3 (pre-trained on ImageNet)
+- **Total Parameters**: 11,485,226
+- **Trainable Parameters**: 11,485,226
+- **Input Size**: 300×300 pixels
+- **Output**: Binary classification (Healthy vs. TB)
 
-### Confusion Matrix
-The final model achieves a balanced classification performance, correctly identifying 45/50 Healthy cases and 45/50 TB cases.
+### Two-Phase Training Strategy
+1. **Phase 1**: Train only the classification head with frozen backbone (10 epochs)
+2. **Phase 2**: Fine-tune the entire network with reduced learning rate (50 epochs with early stopping)
 
-![Confusion Matrix](output1.png)
-*Figure 2: Confusion Matrix validating the 90% accuracy with balanced False Positives and False Negatives.*
+### Advanced Techniques
+- **Mixup Augmentation**: Creates synthetic training examples by combining pairs of images
+- **Learning Rate Scheduling**: Gradual reduction with warm restarts
+- **Test-Time Augmentation (TTA)**: Multiple predictions with different augmentations
+- **Early Stopping**: Monitors validation performance to prevent overfitting
 
----
+## 📈 Training Approach
 
-## 🛠️ Installation & Setup
+python
+def train_model():
+    Two-phase training strategy to combat overfitting with limited data
+    
+    # Phase 1: Train classification head (frozen backbone)
+    freeze_backbone(model)
+    train(epochs=10, lr=9.76e-4)
+    
+    # Phase 2: Fine-tune entire network with reduced learning rate
+    unfreeze_layers(model, unfreeze_ratio=0.3)
+    train(epochs=50, lr=1e-4, early_stopping=True)
+    
+    # Test-Time Augmentation for inference
+    return apply_tta(model)
 
-### Prerequisites
-* Python 3.8+
-* PyTorch, Torchvision
-* Matplotlib, Scikit-learn, Numpy, Pandas
-* Albumentations (for augmentation)
+# Clone the repository
+git clone https://github.com/yourusername/tb-detection.git
+cd tb-detection
 
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/yourusername/tb-detection-xray.git](https://github.com/yourusername/tb-detection-xray.git)
-cd tb-detection-xray
+# Create virtual environment (optional but recommended)
+python -m venv venv
+source venv/bin/activate  # Linux/MacOS
+# OR
+venv\Scripts\activate  # Windows
+
+# Install dependencies
+pip install -r requirements.txt
