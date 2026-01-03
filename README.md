@@ -74,8 +74,3 @@ cd tb-detection
 # Create virtual environment (optional but recommended)
 python -m venv venv
 source venv/bin/activate  # Linux/MacOS
-# OR
-venv\Scripts\activate  # Windows
-
-# Install dependencies
-pip install -r requirements.txt
