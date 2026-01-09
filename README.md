@@ -52,7 +52,7 @@ The project uses a subset from the Sakha-TB dataset:
 - **Early Stopping**: Monitors validation performance to prevent overfitting
 
 <img width="400" height="320" alt="output1" src="https://github.com/user-attachments/assets/1d99bab2-a020-4c38-abef-06f233dffa2f" />
-<img width="600" height="400" alt="output" src="https://github.com/user-attachments/assets/e2c511ea-67e9-44b9-8f98-6c2708beb15e" />
+<img width="400" height="320" alt="output" src="https://github.com/user-attachments/assets/e2c511ea-67e9-44b9-8f98-6c2708beb15e" />
 <img width="400" height="320" alt="output3" src="https://github.com/user-attachments/assets/b1e2c8b3-7f6c-4355-abd0-16ee33d97f1d" />
 
 ## 📈 Training Approach
