@@ -46,7 +46,8 @@ The project uses a subset from the Sakha-TB dataset:
 
 ### Advanced Techniques
 - **Mixup Augmentation**: Creates synthetic training examples by combining pairs of images
-- **Learning Rate Scheduling**: Gradual reduction with warm restarts
+- **Learning Rate Scheduling**: Gradual reduction with warm restarts<img width="659" height="590" alt="output1" src="https://github.com/user-attachments/assets/1d99bab2-a020-4c38-abef-06f233dffa2f" />
+
 - **Test-Time Augmentation (TTA)**: Multiple predictions with different augmentations
 - **Early Stopping**: Monitors validation performance to prevent overfitting
 
