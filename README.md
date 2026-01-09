@@ -46,12 +46,17 @@ The project uses a subset from the Sakha-TB dataset:
 
 ### Advanced Techniques
 - **Mixup Augmentation**: Creates synthetic training examples by combining pairs of images
-- **Learning Rate Scheduling**: Gradual reduction with warm restarts<img width="659" height="590" alt="output1" src="https://github.com/user-attachments/assets/1d99bab2-a020-4c38-abef-06f233dffa2f" />
+- **Learning Rate Scheduling**: Gradual reduction with warm restarts
 
 - **Test-Time Augmentation (TTA)**: Multiple predictions with different augmentations
 - **Early Stopping**: Monitors validation performance to prevent overfitting
 
+<img width="659" height="590" alt="output1" src="https://github.com/user-attachments/assets/1d99bab2-a020-4c38-abef-06f233dffa2f" />
+<img width="1490" height="990" alt="output" src="https://github.com/user-attachments/assets/e2c511ea-67e9-44b9-8f98-6c2708beb15e" />
+<img width="706" height="552" alt="output3" src="https://github.com/user-attachments/assets/b1e2c8b3-7f6c-4355-abd0-16ee33d97f1d" />
+
 ## 📈 Training Approach
+
 
 python
 def train_model():
