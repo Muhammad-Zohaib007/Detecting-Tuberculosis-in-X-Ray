@@ -37,7 +37,7 @@ The project uses a subset from the Sakha-TB dataset:
 - **Base Model**: EfficientNet-B3 (pre-trained on ImageNet)
 - **Total Parameters**: 11,485,226
 - **Trainable Parameters**: 11,485,226
-- **Input Size**: 300×300 pixels
+- **Input Size**:224×224 pixels
 - **Output**: Binary classification (Healthy vs. TB)
 
 ### Two-Phase Training Strategy
